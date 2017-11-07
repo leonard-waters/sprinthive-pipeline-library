@@ -14,7 +14,8 @@ def call(Map parameters = [:], body) {
             containers: [
                 [name: 'maven', image: "${mavenImage}", command: '/bin/sh -c', args: 'cat', ttyEnabled: true, envVars: [ [key: 'MAVEN_OPTS', value: '-Duser.home=/root/'] ]],
                 [name: 'docker', image: "${dockerImage}", command: '/bin/sh -c', args: 'cat', ttyEnabled: true]],
-            volumes: [configMapVolume(configMapName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
+            volumes: [configMapVolume(configMapName: 'jenkins-gradle-settings', mountPath: '$HOME/.gradle'),
+                      configMapVolume(configMapName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
                       hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')],
             envVars: [[key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'], [key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/']]
     ) {
