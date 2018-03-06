@@ -15,7 +15,8 @@ def call(body) {
         "image": config.image,
 		"version": config.version,
 		"stage": config.stage,
-        "name": config.name
+        "name": config.name,
+        "host": config.host
     ]
 
     def populatedTemplates = []
